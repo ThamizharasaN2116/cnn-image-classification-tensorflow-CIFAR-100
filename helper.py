@@ -15,12 +15,7 @@ def _load_label_name_100():
     """
     Load the label names from file
     """
-    return ["beaver", " dolphin", " otter", " seal", " whale", " aquarium fish", " flatfish", " ray", " shark", " trout", " orchids", " poppies", " roses", " sunflowers", " tulips", " bottles", " bowls", " cans", 
-            " cups", " plates", " apples", " mushrooms", " oranges", " pears", " sweet peppers", " clock", " computer keyboard", " lamp", " telephone", " television", " bed", " chair", " couch", " table", " wardrobe", " bee", 
-            " beetle", " butterfly", " caterpillar", " cockroach", " bear", " leopard", " lion", " tiger", " wolf", " bridge", " castle", " house", " road", " skyscraper", " cloud", " forest", " mountain", " plain", " sea", 
-            " camel", " cattle", " chimpanzee", " elephant", " kangaroo", " fox", " porcupine", " possum", " raccoon", " skunk", " crab", " lobster", " snail", " spider", " worm", " baby", " boy", " girl", " man", " woman", 
-            " crocodile", " dinosaur", " lizard", " snake", " turtle", " hamster", 
-            " mouse", " rabbit", " shrew", " squirrel", " maple", " oak", " palm", " pine", " willow", " bicycle", " bus", " motorcycle", " pickup truck", " train", " lawn-mower", " rocket", " streetcar", " tank", " tractor"]
+    return ['apple', 'aquarium_fish', 'baby', 'bear', 'beaver', 'bed', 'bee', 'beetle', 'bicycle', 'bottle', 'bowl', 'boy', 'bridge', 'bus', 'butterfly', 'camel', 'can', 'castle', 'caterpillar', 'cattle', 'chair', 'chimpanzee', 'clock', 'cloud', 'cockroach', 'couch', 'crab', 'crocodile', 'cup', 'dinosaur', 'dolphin', 'elephant', 'flatfish', 'forest', 'fox', 'girl', 'hamster', 'house', 'kangaroo', 'keyboard', 'lamp', 'lawn_mower', 'leopard', 'lion', 'lizard', 'lobster', 'man', 'maple_tree', 'motorcycle', 'mountain', 'mouse', 'mushroom', 'oak_tree', 'orange', 'orchid', 'otter', 'palm_tree', 'pear', 'pickup_truck', 'pine_tree', 'plain', 'plate', 'poppy', 'porcupine', 'possum', 'rabbit', 'raccoon', 'ray', 'road', 'rocket', 'rose', 'sea', 'seal', 'shark', 'shrew', 'skunk', 'skyscraper', 'snail', 'snake', 'spider', 'squirrel', 'streetcar', 'sunflower', 'sweet_pepper', 'table', 'tank', 'telephone', 'television', 'tiger', 'tractor', 'train', 'trout', 'tulip', 'turtle', 'wardrobe', 'whale', 'willow_tree', 'wolf', 'woman', 'worm']
 
     # picked from 
     # import pickle
@@ -238,8 +233,8 @@ def load_preprocess_training_100(batch_id, batch_size):
     return batch_features_labels(features, labels, batch_size)
 
 def display_image_predictions(features, labels, predictions):
-    n_classes = 10
-    label_names = _load_label_names()
+    n_classes = 1000
+    label_names = _load_label_name_100()
     label_binarizer = LabelBinarizer()
     label_binarizer.fit(range(n_classes))
     label_ids = label_binarizer.inverse_transform(np.array(labels))
@@ -252,7 +247,7 @@ def display_image_predictions(features, labels, predictions):
     margin = 0.05
     ind = np.arange(n_predictions)
     width = (1. - 2. * margin) / n_predictions
-
+    print('features: ',len(features), ' lab: ', len(labels), ' pred ', len(predictions))
     for image_i, (feature, label_id, pred_indicies, pred_values) in enumerate(zip(features, label_ids, predictions.indices, predictions.values)):
         pred_names = [label_names[pred_i] for pred_i in pred_indicies]
         correct_name = label_names[label_id]

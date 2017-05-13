@@ -196,7 +196,7 @@ def test_conv_net(conv_net):
 
     logits_out = conv_net(test_x, test_k)
 
-    assert logits_out.get_shape().as_list() == [None, 10],\
+    assert logits_out.get_shape().as_list() == [None, 1000],\
         'Incorrect Model Output.  Found {}'.format(logits_out.get_shape().as_list())
 
     print('Neural Network Built!')
