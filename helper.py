@@ -211,6 +211,14 @@ def batch_features_labels(features, labels, batch_size):
         end = min(start + batch_size, len(features))
         yield features[start:end], labels[start:end]
 
+def preprocess_validation_batch(batch_size):
+    """
+    Load the Preprocessed validation data and return them in batches of <batch_size> or less
+    """
+    filename = 'preprocess_validation_100.p'
+    features, labels = pickle.load(open(filename, mode='rb'))
+
+    return batch_features_labels(features, labels, batch_size)
 
 def load_preprocess_training_batch(batch_id, batch_size):
     """
